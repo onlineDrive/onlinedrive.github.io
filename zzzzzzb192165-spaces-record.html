@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zzzzzzb192165 Spaces音频</title>
+    <style>h1{text-align:center;}#subtitle{white-space:pre-line;text-align:center;margin-top:20px;height:10px}.container{text-align:center}audio{width:100%;max-width: 750px;padding: 15px}</style>
+</head>
+<body>
+  <h1>zzzzzzb192165 Spaces音频存档</h1>
+    <div class="container">
+      <audio controls id="audio">
+        <source src="audio.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <div id="subtitle"></div>
+    </div>
+    <script>
+        async function loadSubtitle(){let t=await fetch("audio.srt").then(t=>t.text());return parseSubtitle(t)}function parseSubtitle(t){let e=t.split("\n").map(t=>t.trim()),i=[];for(let n=0;n<e.length;n++){if(""===e[n])continue;let a=e[n++],l=e[n++],s=e[n++];if(a&&l&&s){let[u,r]=l.split(" --> ").map(t=>parseTimestamp(t));i.push({index:a,start:u,end:r,text:s})}}return i}function parseTimestamp(t){let[e,i,n]=t.split(":").map(t=>t.includes(",")?parseFloat(t.replace(",",".")):parseFloat(t));return 3600*e+60*i+n}async function displaySubtitle(){let t=await loadSubtitle(),e=document.getElementById("audio"),i=document.getElementById("subtitle");e.addEventListener("timeupdate",()=>{let n=e.currentTime,a=t.find(t=>n>=t.start&&n<=t.end);a&&n>=a.start&&n<=a.start+2?i.textContent=a.text:i.textContent=""})}displaySubtitle();
+    </script>
+</body>
+</html>

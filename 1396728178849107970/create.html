@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <textarea name="" id="input" cols="30" rows="10"></textarea>
+  <textarea name="" id="out" cols="30" rows="10"></textarea>
+  <script>
+    async function run () {
+      const input = document.getElementById('input').value.match(/.+/g)
+      const out = document.getElementById('out')
+      let html = ''
+      for (const x of input) {
+        html += `
+              <div class="card card-preview category-card">
+                <div class="card-inner mt-3">
+                  <div class="nya-title nk-ibx-action-item progress-rating">
+                    <span class="nk-menu-text font-weight-bold">${x.replace(/_/g, '/').replace(/-.*/g, '')}</span>
+                  </div>
+                  <pre>
+${await fetch('/src/1done/'+x+'.txt').then(r=>r.text())}
+                  </pre>
+                  <div style="text-align: center;">
+                    <audio controls class="audioPlayer" data-subtitle="${x}.srt">
+                      <source src="src/${x}.mp3" type="audio/mpeg">
+                    </audio>
+                    <p class="subtitleArea">&nbsp;</p>
+                  </div>
+                </div>
+              </div>`
+      }
+      out.value = html
+    }
+  </script>
+</body>
+</html>

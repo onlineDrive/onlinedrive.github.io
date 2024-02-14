@@ -2686,27 +2686,6 @@ Credit : https://scriptbin.works/u/Aurora_012/m4f-the-butler-msub-fdom-listener-
           const seconds = parseFloat(parts[2].replace(',', '.'))
           return hours * 3600 + minutes * 60 + seconds
         }
-        
-        function loadAudio(audio) {
-          const source = audio.querySelector('source')
-          const audioSrc = source.getAttribute('data-src')
-          source.src = audioSrc
-          audio.load()
-          audio.removeEventListener('play', loadAudio)
-        }
-        
-        function checkViewport() {
-          audioPlayers.forEach(function(audio) {
-            const rect = audio.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom >= 0) {
-              loadAudio(audio)
-            }
-          })
-        }
-
-        window.addEventListener('scroll', checkViewport)
-        window.addEventListener('resize', checkViewport)
-        window.addEventListener('DOMContentLoaded', checkViewport)
       })
     </script>
 </body>
